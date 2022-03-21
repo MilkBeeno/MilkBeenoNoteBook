@@ -13,4 +13,4 @@
 * [Google Play 访问权限](https://github.com/MilkBeeno/MilkBeenoNoteBook/blob/master/Android/PackageManager/GooglePlay.md)
 
 ## 路由方案
-* [AutoService 路由方案](https://github.com/MilkBeeno/MilkBeenoNoteBook/blob/master/Android/PackageManager/GooglePlay.md)
+* [AutoService 路由方案](https://github.com/MilkBeeno/MilkBeenoNoteBook/blob/master/Android/Router/AutoService.md)
