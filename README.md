@@ -10,4 +10,4 @@
 * [Retrofit 源码分析](https://github.com/MilkBeeno/milk-beenno-note-book/blob/master/Android/NetWork/retrofit.md)
 
 ## 包信息问题
-* [Google Play 访问权限](https://github.com/MilkBeeno/milk-beenno-note-book/blob/master/Android/PackageManager/googlePlay.md)
+* [Google Play 访问权限](https://github.com/MilkBeeno/MilkBeenoNoteBook/blob/master/Android/PackageManager/GooglePlay.md)
