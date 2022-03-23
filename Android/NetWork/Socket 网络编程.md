@@ -1,11 +1,11 @@
 # Socket 网络编程
 计算机网络概述：
 
-   利用通信线路将地理分散的、具有独立功能得计算机系统和通信设备按不同得形式连接起来，以功能完善得网络软件及协议实现资源共享和信息传递的系统。
+  利用通信线路将地理分散的、具有独立功能得计算机系统和通信设备按不同得形式连接起来，以功能完善得网络软件及协议实现资源共享和信息传递的系统。
 
 计算机网络体系结构：
 
-   网络数据的传输是以包的形式进行，其工作流程就是拼包和拆包。在数据传输过程中，包是全能性术语，除此还有帧用于表示数据链路层中包的单位、片是 IP 中数据的单位、段则表示 TCP 数据流中的信息、消息表示应用协议中数据的单位。首先在应用层获取应用协议传过来的数据、经过传输层附加 TCP 包首部、经过网络层附加IP包首部、再经过数据链路层附加以太网包首部、最后经过物理层传输到达目标点进行逆向解包，最终展示给用户。
+  网络数据的传输是以包的形式进行，其工作流程就是拼包和拆包。在数据传输过程中，包是全能性术语，除此还有帧用于表示数据链路层中包的单位、片是 IP 中数据的单位、段则表示 TCP 数据流中的信息、消息表示应用协议中数据的单位。首先在应用层获取应用协议传过来的数据、经过传输层附加 TCP 包首部、经过网络层附加IP包首部、再经过数据链路层附加以太网包首部、最后经过物理层传输到达目标点进行逆向解包，最终展示给用户。
 
 [drawio](k83yzg19ZunrClTf2vON2tclUzTu-fdGMmkovdTSXa0.svg)
 
@@ -21,7 +21,7 @@
 
 TCP/IP 协议族：
 
-  TCP/IP 协议簇是 Internet 的基础，也是当今最流行的组网形式。TCP/IP 是一组协议的代名词，包括许多别的协议，组成了 TCP/IP 协议簇。其中比较重要的有 SLIP协议、PPP 协议、IP 协议、ICMP 协议、ARP 协议、TCP 协议、UDP 协议、FTP 协议、DNS 协议、SMTP 协议等。
+ TCP/IP 协议簇是 Internet 的基础，也是当今最流行的组网形式。TCP/IP 是一组协议的代名词，包括许多别的协议，组成了 TCP/IP 协议簇。其中比较重要的有 SLIP协议、PPP 协议、IP 协议、ICMP 协议、ARP 协议、TCP 协议、UDP 协议、FTP 协议、DNS 协议、SMTP 协议等。
 
 协议介绍：
 
@@ -49,13 +49,13 @@ TCP/IP 四次挥手:
 
 网络通信：
 
-   Socket 是应用层语 TCP/IP 协议族通信的中间软件抽象层、它是一组接口，其实是一个门面模式。TCP 用主机的IP地址加上主机上的端口号作为 TCP 连接的端点，这种端点就叫套接字( Socket )。
+ Socket 是应用层语 TCP/IP 协议族通信的中间软件抽象层、它是一组接口，其实是一个门面模式。TCP 用主机的IP地址加上主机上的端口号作为 TCP 连接的端点，这种端点就叫套接字( Socket )。
 
 [drawio](7PpR9wuSpX5WCcddUOaucHWw4LgK6W3hBzTr5z-EOAk.svg)
 
 原生 JDK 网络编程--BIO :
 
-    阻塞式网络通讯( socket 没有读取到网络数据就阻塞当前线程)。服务端 BIO 实现 : 首先创建 ServerSocket 对象绑定当前端口、启动接口监听，然后接收客户端的连接并返回 Socket 对象，和客户端连接成功后创建一个新的线程进行阻塞式通信( bind() -> accept() ->开启一个 Thread { Socket-> Write 和 Read })，accept 是一个阻塞方法。客户端:获取服务端IP和端口号并用 socket 进行连接，然后进行数据的读写。
+ 阻塞式网络通讯( socket 没有读取到网络数据就阻塞当前线程)。服务端 BIO 实现 : 首先创建 ServerSocket 对象绑定当前端口、启动接口监听，然后接收客户端的连接并返回 Socket 对象，和客户端连接成功后创建一个新的线程进行阻塞式通信( bind() -> accept() ->开启一个 Thread { Socket-> Write 和 Read })，accept 是一个阻塞方法。客户端:获取服务端IP和端口号并用 socket 进行连接，然后进行数据的读写。
 
 [drawio](vp5aJBwwU7u8_B48I04JBtWg2Zb79IZ4MCAUYpoDGu8.svg)
 
@@ -86,7 +86,7 @@ class SocketTest(private val socket: Socket) {
 ```
 原生 JDK 网络编程--NIO：
 
-   多路复用非阻塞式编程(一个线程服务多个客户端)、其三大核心 : Selector 选择器、Channel 管道和 Buffer 缓冲区。服务端 NIO 实现:首先创建 Selector 对象和 ServerSocketChannel 对象、并让 ServerSocketChannel 在 Selector 中注册一个关注客户端连接的 SelectionKey 事件。当有客户端连接进来后，Selector 会通知 ServerSocketChannel 有客户端连接事件而后产生 SocketChannel 对象，SocketChannel 在 Selector 中注册网络上关注读 SelectionKey 事件。当客户端往服务器发送数据时，Selector 会通知相对应的 SocketChannel 有读事件进来，SocketChannel 获取网络数据后会将数据缓存在 Buffer 中，然后由 Buffer 输出到相应的业务逻辑处理程序，当有数据从业务逻辑产生时也会先缓存在Buffer中，在由 Buffer 输入到 SocketChannel 中推送给客户端。当有多个客户端连接时， ServerSocketChannel 会根据客户端产生相对应的 SocketChannel，并注册 SelectionKey 事件监听网络上的读事件，最后通过 Buffer 进行数据输入输出。
+ 多路复用非阻塞式编程(一个线程服务多个客户端)、其三大核心 : Selector 选择器、Channel 管道和 Buffer 缓冲区。服务端 NIO 实现:首先创建 Selector 对象和 ServerSocketChannel 对象、并让 ServerSocketChannel 在 Selector 中注册一个关注客户端连接的 SelectionKey 事件。当有客户端连接进来后，Selector 会通知 ServerSocketChannel 有客户端连接事件而后产生 SocketChannel 对象，SocketChannel 在 Selector 中注册网络上关注读 SelectionKey 事件。当客户端往服务器发送数据时，Selector 会通知相对应的 SocketChannel 有读事件进来，SocketChannel 获取网络数据后会将数据缓存在 Buffer 中，然后由 Buffer 输出到相应的业务逻辑处理程序，当有数据从业务逻辑产生时也会先缓存在Buffer中，在由 Buffer 输入到 SocketChannel 中推送给客户端。当有多个客户端连接时， ServerSocketChannel 会根据客户端产生相对应的 SocketChannel，并注册 SelectionKey 事件监听网络上的读事件，最后通过 Buffer 进行数据输入输出。
 
 三大核心组件：
 
@@ -96,7 +96,7 @@ class SocketTest(private val socket: Socket) {
 
 Buffer 缓存：
 
-   客户端请求服务器进行读写时，Selector 感知读写事件通知 SocketChannel 进行读、写并把数据写入 Buffer 中、逻辑程序在 Buffer 中读、写。Buffer 有三个重要属性: capacity、position、limit。Buffer 进行数据写入时，position 代表内存下一个写入的位置、limit 表示可以写入的最大长度(一般来说 limit 等于capacity)。当 SocketChannel 从 Buffer 中读取数据时、Buffer 中有个读写模式切换的 flip() 函数、Buffer 切换到读模式 position 的位置会移动到数据开始位置、而 limit 则移动到写入数据时 position 位置、最后将数据从 Buffer 中读出并写入 SocketChannel 中。
+ 客户端请求服务器进行读写时，Selector 感知读写事件通知 SocketChannel 进行读、写并把数据写入 Buffer 中、逻辑程序在 Buffer 中读、写。Buffer 有三个重要属性: capacity、position、limit。Buffer 进行数据写入时，position 代表内存下一个写入的位置、limit 表示可以写入的最大长度(一般来说 limit 等于capacity)。当 SocketChannel 从 Buffer 中读取数据时、Buffer 中有个读写模式切换的 flip() 函数、Buffer 切换到读模式 position 的位置会移动到数据开始位置、而 limit 则移动到写入数据时 position 位置、最后将数据从 Buffer 中读出并写入 SocketChannel 中。
 
 [drawio](tf7hsgb2g0S4BGrQz0Yj7uuJIgpmDDvZg29inXGoJOg.svg)
 
