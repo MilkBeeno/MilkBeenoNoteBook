@@ -6,6 +6,7 @@
 * [JVM 内存区域分配](https://github.com/MilkBeeno/milk-beenno-note-book/blob/master/Android/Java/jvm.md)
 
 ## 网络请求
+* [Socket 网络通信](https://github.com/MilkBeeno/MilkBeenoNoteBook/blob/master/Android/NetWork/Socket.md)
 * [Okhttp 源码分析](https://github.com/MilkBeeno/milk-beenno-note-book/blob/master/Android/NetWork/okhttp.md)
 * [Retrofit 源码分析](https://github.com/MilkBeeno/milk-beenno-note-book/blob/master/Android/NetWork/retrofit.md)
 
