@@ -44,12 +44,16 @@ TCP/IP 四次挥手:
 <div align=center><img src="https://github.com/MilkBeeno/MilkBeenoNoteBook/blob/master/Android/NetWork/Svg/tcp_four.svg" width="600"/></div>
 
 （1）.第一次挥手:客户端向服务端发送一个 FIN 报文( FIN=1 seq=28356(序列号))、客户端进入 FIN\_WAIT\_1 状态(客户端不再发送数据)。
+
 （2）.第二次挥手:服务端收到客户端 FIN 报文、服务端发出应答报文 ACK ( ACK=1 seq=28357(序列号))，服务端进入 CLOSE\_WAIT 状态(知道客户端不再发数据)，客户端进入 FIN\_WAIT 状态。
+
 （3）.第三次挥手:服务端将所有数据发送给客户端后、发送一个 FIN ( FIN=1 seq=783469)报文通知客户端，服务端进入 CLOSE 状态。服务端的 ACK 报文和 FIN 报文可能合并进行发送(服务端将所有数据发送完毕后)。
+
 （4）.第四次挥手:客户端收到服务端FIN报文后进入TIME\_WAITING状态，并发出 ACK ( ACK=1 seq=783470) 应答报文，服务端收到客户端应答后进入 CLOSED 状态。
   客户端在进入 TIME\_WAITING 状态后在经过 2\*MSL (最长报文段寿命，存活最长时间 RFC : 2分钟)时间后才会进入 CLOSED 状态(①传输丢包情况下、保证服务端迟来的报文有足够的时间被识别和解析。②确保可靠的终止 TCP/IP 连接)。
 
 网络通信：
+
  Socket 是应用层语 TCP/IP 协议族通信的中间软件抽象层、它是一组接口，其实是一个门面模式。TCP 用主机的IP地址加上主机上的端口号作为 TCP 连接的端点，这种端点就叫套接字( Socket )。
 
 原生 JDK 网络编程--BIO :
@@ -92,7 +96,9 @@ class SocketTest(private val socket: Socket) {
 三大核心组件：
 
 （1）.ServerSocketChannel : 绑定某个端口并接收连接(对应BIO中的 ServerSocket )。
+
 （2）.Selector: ① ServerSocketChannel 在 Selector 注册客户端的连接 SelectionKey 事件 ② 客户端连接服务端、Selector 感知客户端连接事件后、通知  ServerSocketChannel 和客户端进行连接。
+
 （3）.SocketChannel : ServerSocketChannel 连接成功后产生 SocketChannel，并在 Selector 注册关注读或写的 SelectionKey 事件(对应 BIO 中 Socket )。
 
 Buffer 缓存：
