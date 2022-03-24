@@ -36,7 +36,9 @@ TCP/IP 三次握手:
 <div align=center><img src="https://github.com/MilkBeeno/MilkBeenoNoteBook/blob/master/Android/NetWork/Svg/tcp_three.svg" width="600"/></div>
 
 （1）.第一次握手:客户端向服务端发送一个 SYN 报文( TCP 报文中含有 SYN 标识位的报文、SYN=1 seq= 24316(序列号))、客户端进入存储在 TCP 中为 SYN\_SENT 状态。
+
 （2）.第二次握手:服务收到客户端报文、得知客户端需要建立连接、服务端发出应答报文( SYN=1 ACK=1(标志位)、服务端进入SYN\_RECEIVED 状态 ack=24317(为客户端 seq+1、表示服务端收到客户端消息) seq=6478 (序列号))。
+
 （3）. 第三次握手:客户端收到服务端报文、检查 ACK 是否等于1 ack 是否等于客户端 seq+1、而后发送 ACK 报文( ACK=1 seq=6479 )应答服务器、客户端进入连接、服务端收到报文也进入连接状态。
 
 TCP/IP 四次挥手: 
